@@ -1,0 +1,17 @@
+# Use official Tomcat with a JDK
+FROM tomcat:9.0-jdk11
+
+# Install envsubst (gettext) to substitute env vars into the context file
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends gettext-base \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy the WAR as ROOT.war so Tomcat serves it at '/'
+COPY ROOT.war /usr/local/tomcat/webapps/ROOT.war
+
+# Copy templated context.xml that will be filled with env vars at container start
+COPY context.xml.template /tmp/context.xml.template
+
+# Use a small entrypoint: substitute env vars then run Tomcat
+CMD envsubst < /tmp/context.xml.template > /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml \
+    && catalina.sh run
