@@ -1,2 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Context path="/OnlineEnrollment"/>
+<Resource name="jdbc/collegedb"
+          auth="Container"
+          type="javax.sql.DataSource"
+          maxTotal="20"
+          maxIdle="10"
+          maxWaitMillis="10000"
+          username="sql12804791"
+          password="Id8yQzPtvK"
+          driverClassName="com.mysql.cj.jdbc.Driver"
+          url="jdbc:mysql://sql12.freesqldatabase.com:3306/sql12804791?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"/>
